@@ -8,6 +8,14 @@
 # testing
 /coverage
 
+/src/api/UseCaver_old.js
+/src/api/UseKlip_old.js
+/src/api/UseCaver.js
+/src/App_old.js
+/src/abi/log_trademark_old.json
+/src/constants
+/src/InputTag.js
+
 # production
 /build
 
@@ -25,3 +33,5 @@ yarn-error.log*
 
 # etc
 README-react.md
+README-klaytn.md
+dump-snippets.md
