@@ -35,6 +35,10 @@ function App() {
   // on click my card
   // on click market card
 
+  console.log("test!");
+  console.log(process.env.REACT_APP_KAS_ACCESS_KEY_ID);
+  console.log(REACT_APP_KAS_ACCESS_KEY_ID);
+  
   // get user data
   const getUserData = () => {
     // 자기 주소, 자기 클레이 잔고
@@ -43,6 +47,7 @@ function App() {
       const _balance = await getBalanceReact(address);
       setMyBalance(_balance);
       alert('get address');
+
     });
 
   }
@@ -84,6 +89,7 @@ function App() {
           내 지갑
         </div>
         <p>주소 : {myAddress}</p>
+        <em>%REACT_APP_KAS_ACCESS_KEY_ID%</em>
         <br />
         <Alert
           variant={'balance'}
