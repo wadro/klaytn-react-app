@@ -37,7 +37,7 @@ function App() {
 
   console.log("test!");
   console.log(process.env.REACT_APP_KAS_ACCESS_KEY_ID);
-  console.log(REACT_APP_KAS_ACCESS_KEY_ID);
+  // console.log(REACT_APP_KAS_ACCESS_KEY_ID);
   
   // get user data
   const getUserData = () => {
