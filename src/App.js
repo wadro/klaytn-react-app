@@ -1,23 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // Clean Save !! // Clean Save !!
 import './App.css';
+import './logmark.css'
 import * as KlipAPI from './api/UseKlip'
 import QRCode from 'qrcode.react';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import { getBalanceReact, readTokens } from './api/UseCaver'
+import { Alert, Container } from 'react-bootstrap';
 
 const DEFAULT_QR_CODE = "DEFAULT";
 
+const DEFAULT_ADDRESS = '0x0000';
+
 
 function App() {
+  // State data
+  // Global data(domain data)
+  // 1. address -> usestate
+  const [myAddress, setMyAddress] = useState(DEFAULT_ADDRESS);
+
+  // 2. nft
+  const [nfts, setNfts] = useState([]);
+
+  // tab ui
+  // min input
+  // modal
+
+  // balance
+  const [myBalance, setMyBalance] = useState('0');
+
+  // fetch market nft
+  // fetch my nfts
+  // on click mint
+  // on click my card
+  // on click market card
+
+  // get user data
+  const getUserData = () => {
+    // 자기 주소, 자기 클레이 잔고
+    KlipAPI.getAddress(setQrvalue, async (address) => {
+      setMyAddress(address);
+      const _balance = await getBalanceReact(address);
+      setMyBalance(_balance);
+      alert('get address');
+    });
+
+  }
 
   const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
   const [address, setAddress] = useState('no address');
-  
-    
-  const onClickGetAddress = () => {
-    KlipAPI.getAddress(setAddress, setQrvalue);
-    alert('get address');
-  }
+
 
   const onClickGetContract = () => {
     KlipAPI.getContract(setQrvalue);
@@ -30,70 +62,60 @@ function App() {
     readTokens();
   }
 
-  const onClickEnrollTrademark = () => {   
+  const onClickEnrollTrademark = () => {
     const addressval = document.getElementById('address').innerText;
     const input1val = document.getElementById('input1').value;
     const input2val = document.getElementById('input2').value;
-    KlipAPI.enrollTrademark(addressval,input1val,input2val,setQrvalue);
+    KlipAPI.enrollTrademark(addressval, input1val, input2val, setQrvalue);
     alert('등록');
   }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>상표 임시 등록 서비스 (증명 자료 제출시 사용)</h1>
-        <button 
-          title="get EnrolledTokens" 
-          color="#ff5c5c" 
-          onClick={onClickGetEnrolledTokens} 
+      <div style={{ backgroundColor: '#FAEBEF', padding: 10 }}>
+        <div 
+          style={{ 
+            fontSize: 30, 
+            fontWeight: 'bold', 
+            paddingLeft: 5, 
+            marginTop: 10 
+          }}
         >
-          getEnrolledTokens
-        </button> 
-
-        <p id="address">
-          {address}
-        </p>
-        
+          내 지갑
+        </div>
+        <p>주소 : {myAddress}</p>
         <br />
-        <label for="input1">등록번호 입력</label>
-        <input
-          id="input1"
-          type="text"
-        />
+        <Alert
+          variant={'balance'}
+          style={{ backgroundColor: '#333D79', fontSize: 25 }}>
+          <p>잔고 : {myBalance}</p>
+        </Alert>
+      </div>
+      {/* #FAEBEF */}
+      {/* 주소 잔고 */}
+      <button
+        title="get userdata"
+        color="#ff5c5c"
+        onClick={getUserData}
+      >get userdata</button>
 
-        <label for="input2">상표 이름 입력</label>
-        <input
-          id="input2"
-          type="text"
-        />
-        
+      <div>
 
-        <br />
-        <button 
-          title="get contract" 
-          color="#ff5c5c" 
-          onClick={onClickGetContract} 
-        >
-          Get Contract
-        </button>
-        <br />
-       
-        <QRCode value={qrvalue} />
+      </div>
 
-        <button 
-          title="get address" 
-          color="#ff5c5c" 
-          onClick={onClickGetAddress} 
-        >
-          Get Address
-        </button>
+      <Container style={{ backgroundColor: 'white', width: 300, padding: 20 }}>
+        <QRCode value={qrvalue} size={256} style={{ margin: 'auto' }} />
+      </Container>
 
-        <button onClick={onClickEnrollTrademark}>상표 임시 등록</button>
-        
-      </header>
+
+      {/* 갤러리(마켓, 내 지갑 공유하는 ui) */}
+      {/* 발행페이지 */}
+      {/* 탭 */}
+      {/* 모달 */}
+
     </div>
 
-    
+
   );
 }
 
