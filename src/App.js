@@ -52,6 +52,8 @@ function App() {
   console.log("test!");
   console.log(typeof process.env.REACT_APP_KAS_ACCESS_KEY_ID);
   console.log(process.env.REACT_APP_KAS_ACCESS_KEY_ID);
+  console.log(process.env.REACT_APP_MARKLOG_CYPRESS_CONTRACT_ADDRESS);
+  console.log(process.env.REACT_APP_MARKLOG_BAOBAB_CONTRACT_ADDRESS);
   console.log(process.env.REACT_APP_VERSION);
   
   // get user data
