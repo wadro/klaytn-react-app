@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as log_trademark from '../abi/log_trademark.json';
+import * as log_trademark from '../abi/cypressContract.json';
 /**
  * log_trademark.default[0] -> logTrademark
  * log_trademark.default[1] -> mintWithTokenURI
@@ -14,7 +14,9 @@ import * as log_trademark from '../abi/log_trademark.json';
  * log_trademark.default[10] -> tokenOwner
  * log_trademark.default[11] -> tokenURIs
  */
- 
+
+const CONTRACT_ADDRESS = process.env.REACT_APP_MARKLOG_CYPRESS_CONTRACT_ADDRESS;
+// process.env.REACT_APP_MARKLOG_CONTRACT_ADDRESS
 const A2A_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 const APP_NAME = 'KLAY_MARKET';
 const QR_REQUEST = "https://klipwallet.com/?target=/a2a?request_key=";
@@ -62,7 +64,7 @@ export const getContract = ( _setQrvalue) => {
             transaction: {
                 // "from":"",
                 // "to":"smart contract address", 
-                "to": process.env.REACT_APP_MARKLOG_CONTRACT_ADDRESS,
+                "to": CONTRACT_ADDRESS,
                 "value":"0",
                 "abi":JSON.stringify(log_trademark.default[11]), // 함수 abi - tokenUris
                 "params":`["0"]`,
@@ -98,7 +100,7 @@ export const getEnrolledTokens = (_setQrvalue) => {
             transaction: {
                 // "from":"",
                 // "to":"smart contract address", 
-                "to": process.env.REACT_APP_MARKLOG_CONTRACT_ADDRESS,
+                "to": CONTRACT_ADDRESS,
                 "value":"0",
                 "abi":JSON.stringify(log_trademark.default[4]), // 함수 abi - tokenUris
                 "params":"[]",
@@ -141,7 +143,7 @@ export const enrollTrademark = (address, _tokenId, _tokenUri,_setQrvalue) => {
                 transaction: {
                     // "from":"",
                     // "to":"smart contract address",
-                    "to": process.env.REACT_APP_MARKLOG_CONTRACT_ADDRESS,
+                    "to": CONTRACT_ADDRESS,
                     // "value":"0",
                     "abi":JSON.stringify(log_trademark.default[1]), // 함수 abi - mint
                     "params":`[${address},"${_tokenId}","${_tokenUri}"]`,
@@ -175,3 +177,6 @@ export const enrollTrademark = (address, _tokenId, _tokenUri,_setQrvalue) => {
         })
     } 
 }
+
+
+// logTrademark (from:address, tokenId:uint256, logData:string)

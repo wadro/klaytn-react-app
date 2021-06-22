@@ -18,13 +18,17 @@
 /src/App_old2.js
 /src/App_old.css
 
-/src/abi/log_trademark_old.json
+# /src/abi/log_trademark_old.json
+/src/abi_copy
 
 /src/constants
 /src/InputTag.js
 
 # production
 /build
+
+# smart contracts
+/contracts
 
 # misc
 .DS_Store
