@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import './marklog.css'
+import Fuse from 'fuse.js';
 import * as KlipAPI from './api/UseKlip'
+import * as CaverAPI from './api/UseCaver'
 import QRCode from 'qrcode.react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Fuse from 'fuse.js';
-import * as CaverAPI from './api/UseCaver'
-// import { getLogsAll, getBalanceReact, readTokens } from ''
 import { Button, Form, Alert, Card, Container, Nav } from 'react-bootstrap';
+// import { getLogsAll, getBalanceReact, readTokens } from ''
 
 
 const DEFAULT_QR_CODE = "DEFAULT";
-
-const DEFAULT_ADDRESS = '0x0000';
+const DEFAULT_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 // console.log(Fuse);
 const characters = [
   {  
     title: "one",
     tokenUri: "https://cdn.pixabay.com/photo/2014/09/07/15/31/number-437919_960_720.jpg",
-    description: "number yellow 1",
+    description: "number test 1",
     category: 100,
     sector: 1000
   },
   {  
     title: "two",
     tokenUri: "https://cdn.pixabay.com/photo/2014/09/07/15/31/number-437918_960_720.jpg",
-    description: "number yellow 2",
+    description: "number test 2",
     category: 100,
     sector: 1000
   }
@@ -113,7 +112,9 @@ function App() {
     updateQuery(currentTarget.value);
   }
 
-
+  console.log("enrollString");
+  console.log(enrollString);
+  console.log(enrollString.tokenUri.indexOf(".jpg") !== -1 || enrollString.tokenUri.indexOf(".png") !== -1);
   
   console.log("test!");
   console.log(typeof process.env.REACT_APP_KAS_ACCESS_KEY_ID);
@@ -238,6 +239,18 @@ function App() {
 
   return (
     <div className="App">
+      <h1>개발 중인 페이지 입니다.</h1>
+      <h3>정상 동작되는 기능</h3>
+      <ol>
+        <li>탭 이동</li>
+        
+      </ol>
+      <h3>미구현 기능</h3>
+      <ol>
+        <li>검색데이터 구축</li>
+        <li>상표 등록</li>
+        
+      </ol>
       <div style={{ backgroundColor: '#FAEBEF', padding: 10 }}>
         {/* 주소 잔고 */}
         <div
@@ -289,7 +302,7 @@ function App() {
       >
         getAllTokens
       </button> */}
-      {tab === 'SEARCH' || tab === 'MY' && (
+      {tab === 'SEARCH' && (
         <div>
           {/* <input type="text" value={query} /> */}
           {/* <input type="text" value={query} onChange={onSearch} /> */}
@@ -304,7 +317,7 @@ function App() {
             const { title, tokenUri, description, category, sector } = character;
             return (
               <li key={`tkey${index}`} className="character">
-                {tokenUri.indexOf('.png')=== -1 ? (
+                {(tokenUri.indexOf('.png')=== -1 ||tokenUri.indexOf('.jpg')=== -1) ? (
                   <span className="character-thumb" />
                 ) : (
                   <span className="character-thumb" style={{
@@ -343,35 +356,139 @@ function App() {
       {/* 발행페이지 */}
       {tab === 'ENROLL' && (
         <div className="container" style={{ padding: 0, width: "100%" }}>
+          enrollString
+          <br />
+          {(enrollString.tokenUri.indexOf(".png")!== -1  || enrollString.tokenUri.indexOf(".jpg")!== -1 )}
+          {console.log(enrollString.tokenUri.indexOf(".jpg") == -1) }
+          <br />
+          {enrollString.sector}
+          <br />
           <Card
             className="text-center"
             style={{ color: "black", height: "50%", borderColor: "#c5b358" }}
           >
             <Card.Body style={{ opacity: 0.9, backgroundColor: "black" }}>
-              {enrollString.indexOf(".png") !== -1 &&
-                <Card.Img src={enrollString} height="50%" />}
-              <Form>
-                <Form.Group>
-                  {/* 텍스트 인풋 */}
-                  <Form.Control
-                    onChange={(e) => {
-                      console.log(e.target.value);
-                      setEnrollString(e.target.value);
-                    }}
-                    type="text"
-                    placeholder="등록할 상표"
-                  />
-                </Form.Group>
-                <br />
-                <Button
-                  onClick={() => { onClickEnrollTrademark(enrollString) }}
-                  variant="primary" style={{
-                    backgroundColor: "#810034",
-                    borderColor: "#810034"
-                  }}>Primary</Button>{' '}
-              </Form>
+                  <div>
+                  {enrollString.tokenUri.indexOf(".png") !== -1 || enrollString.tokenUri.indexOf(".jpg") !== -1 &&
+                  <Card.Img src={enrollString.tokenUri} height="50%" />}
+                  <Form>
+                    <Form.Group>
+                      {/* 텍스트 인풋 */}
+                      <Form.Control
+                        onChange={(e) => {
+                          console.log({title:e.target.value});
+                          setEnrollString(prevState => ({
+                            ...prevState,
+                            title: e.target.value
+                            })
+                          );
+                        }}
+                        type="text"
+                        placeholder="등록할 상표 이름"
+                      />
+                      <Form.Control
+                        onChange={(e) => {
+                          console.log({tokenUri:e.target.value});
+                          setEnrollString(prevState => ({
+                            ...prevState,
+                            tokenUri: e.target.value
+                            })
+                          );
+                        }}
+                        type="text"
+                        placeholder="등록할 URI (이미지 파일 jpg 또는 png)"
+                      />
+                      <Form.Control
+                        onChange={(e) => {
+                          console.log({description:e.target.value});
+                          setEnrollString(prevState => ({
+                            ...prevState,
+                            description: e.target.value
+                            })
+                          );
+                          
+                        }}
+                        type="text"
+                        placeholder="등록할 상표 설명"
+                      />
+                      <Form.Control
+                        onChange={(e) => {
+                          console.log({category:e.target.value});
+                          setEnrollString(prevState => ({
+                            ...prevState,
+                            category: e.target.value
+                            })
+                          );
+                        }}
+                        type="number"
+                        placeholder="등록할 상표 종류"
+                      />
+                      <Form.Control
+                        onChange={(e) => {
+                          console.log({sector:e.target.value});
+                          setEnrollString(prevState => ({
+                            ...prevState,
+                            sector: e.target.value
+                            })
+                          );
+                        }}
+                        type="number"
+                        placeholder="등록할 상표"
+                      />
+                    </Form.Group>
+                    <br />
+                    <Button
+                      onClick={() => { 
+                        //onClickEnrollTrademark(enrollString);
+                        alert('등록테스트');
+                       }}
+                      variant="primary" style={{
+                        backgroundColor: "#810034",
+                        borderColor: "#810034"
+                      }}>Primary</Button>{' '}
+                  </Form>
+                  </div>
             </Card.Body>
           </Card>
+        </div>
+      )}
+
+      {tab === 'MY' && (
+        <div>
+          <ul className="characters">
+          {characterResults.map((character,index) => {
+            const { title, tokenUri, description, category, sector } = character;
+            return (
+              <li key={`tkey${index}`} className="character">
+                {tokenUri.indexOf('.png')=== -1 ? (
+                  <span className="character-thumb" />
+                ) : (
+                  <span className="character-thumb" style={{
+                    backgroundImage: `url(${tokenUri})`
+                  }} />
+                )}
+                
+                <ul className="character-meta">
+                  <li>
+                    <strong>title:</strong> { title }
+                  </li>
+                  <li>
+                    <strong>tokenUri:</strong> { tokenUri }
+                  </li>
+                  <li>
+                    <strong>description:</strong> { description }
+                  </li>
+                  <li>
+                    <strong>category:</strong> { category }
+                  </li>
+                  <li>
+                    <strong>sector:</strong> { sector }
+                  </li>
+                </ul>
+              </li>
+            )
+          })}
+        </ul>
         </div>
       )}
 
