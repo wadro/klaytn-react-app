@@ -36,3 +36,4 @@ yarn-error.log*
 /old_files
 /src/abi_copy
 /src/api_copy
+/src/help.html

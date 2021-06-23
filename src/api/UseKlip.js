@@ -28,8 +28,19 @@ const A2A_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 const APP_NAME = 'KLAY_MARKET';
 const QR_REQUEST = "https://klipwallet.com/?target=/a2a?request_key=";
 const KLIP_API_REQUEST = "https://a2a-api.klipwallet.com/v2/a2a/result?request_key=";
+const MOBILE_REQUEST = "kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=0b0ee0ad-62b3-4146-980b-531b3201265d"
 
-
+const getKlipAccessUrl = (method, request_key) => {
+  if (method === 'QR') {
+    return `${QR_REQUEST}${request_key}`
+  }
+  if (method === 'IOS') {
+    
+  }
+  if (method === 'ANDROID') {
+    
+  }
+}
 console.log("ABI LIST");
 console.log(log_trademark.default);
 let abiFn = log_trademark.default.find( fns => fns.name === "enrolledTokens" );

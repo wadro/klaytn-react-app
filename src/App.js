@@ -9,6 +9,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form, Alert, Card, Container, Nav } from 'react-bootstrap';
 // import { getLogsAll, getBalanceReact, readTokens } from ''
 
+// import {isMobile} from 'react-device-detect';
+
 
 const DEFAULT_QR_CODE = "DEFAULT";
 const DEFAULT_ADDRESS = '0x0000000000000000000000000000000000000000';
@@ -253,10 +255,6 @@ function App() {
         <li>상표 등록</li>
         
       </ol>
-
-      
-
-
       <div style={{ backgroundColor: '#FAEBEF', padding: 10 }}>
         {/* 주소 잔고 */}
         <div
@@ -283,9 +281,6 @@ function App() {
           <QRCode value={qrvalue} size={256} style={{ margin: 'auto' }} />
           <br />
         </Container>
-
-
-
       </div>
 
 
