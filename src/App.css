@@ -25,6 +25,183 @@ html {
 
 body {
   height: 100%;
-  background-color: #FAEBEF;
+  background-color: #FAEBEF !important;
   color: #333D79;
+}
+
+/* 테스트 */
+
+.help {
+  position: absolute;
+  background-color: hsl(218, 81%, 8%);
+  color:hsl(0, 0%, 100%);
+  border-radius: 50%;
+  width:20px;
+  height:20px;
+  margin: 0 0 30px 95px;
+  text-align: center;
+  display: inline;
+  z-index: 20;
+  bottom: 100%;
+  right: 7%;
+}
+
+
+.help .tooltip2_1 {
+  visibility: hidden;
+  width: 124px;
+  /* height: 100px; */
+  background-color: hsl(0, 0%, 0%);
+  color:hsl(0, 0%, 100%);
+  /* text-align: center; */
+  border-radius: 20px;
+  /* padding: 5px 0; */
+  padding: 10px;
+
+  position: absolute;
+  z-index: 1;
+  /* margin-top: -80px; */
+  bottom:140%;
+  margin-left: -52.5px;
+  transition: all 2s;
+  display: flex;
+  flex-flow: wrap column;
+}
+
+.help .tooltip2_1::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  /* margin-top: -80px; */
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color:hsl(0, 0%, 0%) transparent transparent transparent;
+}
+
+
+.options {
+  transition: all 1s;
+  /* height:50px; */
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  flex-flow: row wrap;
+  column-gap: 20px;
+  row-gap: 10px;
+
+}
+.options p {
+  margin: auto;
+
+}
+
+.options .tooltip1 {
+  /* visibility: hidden; */
+  max-width: 130rem;
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 0%);
+  border-radius: 20px;
+  padding: 5px 10px 0 0;
+  /* position: absolute; */
+  /* z-index: 1; */
+  /* margin-top: 340px; */
+  /* margin-left: -450px; */
+  transition: all 2s;
+  display: flex;
+  text-align: center;
+  flex-flow: wrap row;
+  /* justify-items: center; */
+  /* justify-content: center; */
+  margin-top: 10px;
+  gap: 0;
+
+}
+
+.options .tooltip2_2 {
+  /* visibility: hidden; */
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 0%);
+  max-width: 124rem;
+  border-radius: 20px;
+  padding: 5px 10px 0 0;
+  /* justify-items: center; */
+  text-align: center;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* position: absolute; */
+  /* z-index: 1; */
+  transition: all 2s;
+  display: flex;
+  flex-flow: wrap row;
+}
+
+.level-label{
+  display: flex;
+  padding: 10px 0;
+}
+
+.level-btn{
+  fill: #041127;
+  border-radius: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color:hsl(0, 0%, 87%);
+  padding-top: 5px;
+  margin: 0 1rem;
+}
+
+.level-text{
+  align-self: center;
+  text-align: center;
+  padding-right: 20px;
+  /* padding-top: 20px;  */
+  font-weight: bold;
+}
+
+input:checked + .level-label > .level-btn {
+  /* background-color: hsl(217, 83%, 50%); */
+  background-color: #333D79;
+  
+  color: hsl(0, 0%, 100%);
+  border: transparent solid 1px;
+  fill: hsl(0, 0%, 100%);
+}
+
+input:checked + .level-label > .level-text {
+  color: #333D79;
+  /* color: hsl(217, 83%, 50%); */
+  border: transparent solid 1px;
+}
+
+
+
+input:checked + .key-label {
+  /* background-color: hsl(217, 83%, 50%); */
+  background-color: #333D79;;
+  color: hsl(0, 0%, 100%);
+  border: transparent solid 1px;
+}
+
+.key-hidden,.level-hidden {
+  visibility: hidden;
+}
+
+.key-label {
+  padding: 10px;
+  border: hsl(0, 0%, 0%) solid 1px;
+  border-radius: 10px;
+  margin: 20px 5px;
+  font-weight: bold;
+}
+
+.options:hover .tooltip1, .tooltip1:hover ,.options:hover .tooltip3, .tooltip3:hover{ 
+  visibility: visible;
+}
+.help:hover .tooltip2_1, .tooltip2_1:hover{
+  visibility: visible;
+}
+.options:hover .tooltip2_2, .tooltip2_2:hover {
+  visibility: visible;
 }

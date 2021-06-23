@@ -232,6 +232,8 @@ function App() {
   // console.log('test');
   // console.log(getLogs(2));
 
+  
+
   useEffect(() => {
     getUserData();
     getAllTokens();
@@ -251,6 +253,10 @@ function App() {
         <li>상표 등록</li>
         
       </ol>
+
+      
+
+
       <div style={{ backgroundColor: '#FAEBEF', padding: 10 }}>
         {/* 주소 잔고 */}
         <div
@@ -363,6 +369,94 @@ function App() {
           <br />
           {enrollString.sector}
           <br />
+
+          <div>
+          {/* <input type="checkbox" name="denture" id="denture" value="Denture" /> */}
+            <div className="options">
+              <strong>종류 선택 (단일 선택)</strong>  
+              <a href="#">종류 검색 (새 창)</a>
+              <div className="tooltip2_2" id="level-check">
+                <input type="radio" name="level" id="text" value="text" className="level-hidden" />
+                <label htmlFor="text" className="level-label">
+                  <div className="level-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15.642" height="24" viewBox="0 0 15.642 24">
+                      <g>
+                          <path d="M15.544 9.864L6.67 23.568a.976.976 0 0 1-.811.432h-.254a.664.664 0 0 1-.469-.192.569.569 0 0 1-.165-.456l.71-7.752H1.156a.974.974 0 0 1-.824-.456l-.241-.4a.561.561 0 0 1 0-.612L8.965.432A.978.978 0 0 1 9.8 0h.254a.664.664 0 0 1 .469.192.569.569 0 0 1 .165.456L9.966 8.4h4.526a.974.974 0 0 1 .824.456l.241.4a.561.561 0 0 1-.013.608z" transhtmlForm="translate(-5.828 -2) translate(5.828 2)"/>
+                      </g>
+                    </svg>
+                  </div>
+                  <p className="level-text">Text</p>
+                </label>
+                
+                <input type="radio" name="level" id="logo" value="logo" className="level-hidden" />
+                <label htmlFor="logo" className="level-label">
+                  <div className="level-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15.642" height="24" viewBox="0 0 15.642 24">
+                      <g>
+                          <path d="M15.544 9.864L6.67 23.568a.976.976 0 0 1-.811.432h-.254a.664.664 0 0 1-.469-.192.569.569 0 0 1-.165-.456l.71-7.752H1.156a.974.974 0 0 1-.824-.456l-.241-.4a.561.561 0 0 1 0-.612L8.965.432A.978.978 0 0 1 9.8 0h.254a.664.664 0 0 1 .469.192.569.569 0 0 1 .165.456L9.966 8.4h4.526a.974.974 0 0 1 .824.456l.241.4a.561.561 0 0 1-.013.608z" transform="translate(-5.828 -2) translate(5.828 2)"/>
+                      </g>
+                    </svg>
+                  </div>
+                  <p className="level-text">Logo</p>
+                </label>
+                
+                <input type="radio" name="level" id="sound" value="sound" className="level-hidden" />
+                <label htmlFor="sound" className="level-label">
+                  <div className="level-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15.642" height="24" viewBox="0 0 15.642 24">
+                      <g>
+                          <path d="M15.544 9.864L6.67 23.568a.976.976 0 0 1-.811.432h-.254a.664.664 0 0 1-.469-.192.569.569 0 0 1-.165-.456l.71-7.752H1.156a.974.974 0 0 1-.824-.456l-.241-.4a.561.561 0 0 1 0-.612L8.965.432A.978.978 0 0 1 9.8 0h.254a.664.664 0 0 1 .469.192.569.569 0 0 1 .165.456L9.966 8.4h4.526a.974.974 0 0 1 .824.456l.241.4a.561.561 0 0 1-.013.608z" transform="translate(-5.828 -2) translate(5.828 2)"/>
+                      </g>
+                    </svg>
+                  </div>
+                  <p className="level-text">Sound</p>
+                </label>
+
+                <input type="radio" name="level" id="smell" value="smell" className="level-hidden" />
+                <label htmlFor="smell" className="level-label">
+                  <div className="level-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15.642" height="24" viewBox="0 0 15.642 24">
+                      <g>
+                          <path d="M15.544 9.864L6.67 23.568a.976.976 0 0 1-.811.432h-.254a.664.664 0 0 1-.469-.192.569.569 0 0 1-.165-.456l.71-7.752H1.156a.974.974 0 0 1-.824-.456l-.241-.4a.561.561 0 0 1 0-.612L8.965.432A.978.978 0 0 1 9.8 0h.254a.664.664 0 0 1 .469.192.569.569 0 0 1 .165.456L9.966 8.4h4.526a.974.974 0 0 1 .824.456l.241.4a.561.561 0 0 1-.013.608z" transform="translate(-5.828 -2) translate(5.828 2)"/>
+                      </g>
+                    </svg>
+                  </div>
+                  <p className="level-text">Smell</p>
+                </label>
+              </div>
+            </div>
+
+            <div className="options">
+              <strong>업종 선택 (다수 선택)</strong>
+              <a href="#">업종 검색 (새 창)</a>
+              <div id="keyword-check" className="tooltip1">
+                <input type="checkbox" name="website" id="website" value="website" className="key-hidden" />
+                <label htmlFor="website" className="key-label">website</label>
+                
+                <input type="checkbox" name="software" id="software" value="software" className="key-hidden" />
+                <label htmlFor="software" className="key-label">software</label>
+
+                <input type="checkbox" name="program" id="program" value="program" className="key-hidden" />
+                <label htmlFor="program" className="key-label">program</label>
+
+                <input type="checkbox" name="finance" id="finance" value="finance" className="key-hidden" />
+                <label htmlFor="finance" className="key-label">finance</label>
+
+                <input type="checkbox" name="lecture" id="lecture" value="lecture" className="key-hidden" />
+                <label htmlFor="lecture" className="key-label">lecture</label>
+
+                <input type="checkbox" name="information" id="information" value="information" className="key-hidden" />
+                <label htmlFor="information" className="key-label">information</label>
+
+                <input type="checkbox" name="application" id="application" value="application" className="key-hidden" />
+                <label htmlFor="application" className="key-label">application</label>
+                
+              </div>
+                  
+            </div>
+            
+          </div>
+          <br />
           <Card
             className="text-center"
             style={{ color: "black", height: "50%", borderColor: "#c5b358" }}
@@ -450,6 +544,9 @@ function App() {
                   </div>
             </Card.Body>
           </Card>
+          <br />
+          <br />
+          <br />
         </div>
       )}
 
@@ -515,17 +612,21 @@ function App() {
       </div> */}
 
 
-
+        
       {/* 갤러리(마켓, 내 지갑 공유하는 ui) */}
       <Container style={{ padding: 0, width: "100%", height: "100px" }}>
 
       </Container>
+      
       {/* 탭 */}
       <nav
         style={{ backgroundColor: "#1b1717", height: 45, color: 'white' }}
         className="navbar fixed-bottom navbar-light"
         role="navigation"
       >
+        <div className="help">?
+            <span className="tooltip2_1">카카오 클레이튼 클립 지갑을 <br />이용합니다.<br /> 헬퍼 페이지는 준비 중입니다.</span>
+        </div>
         <Nav className="w-100">
           <div className="d-flex flex-row justify-content-around w-100">
             <div
@@ -569,10 +670,45 @@ function App() {
       </nav>
       {/* 모달 */}
 
+
+      {/* js */}
+      {()=>{
+        
+        const levlabels = document.getElementById("level-check").querySelectorAll('.level-hidden');
+        console.log(levlabels);
+        // htmlFor(const iterator of levlabels) {
+        //   console.log(iterator);
+          // iterator.addEventListener('click',showChecked);
+        // }
+    
+        const c2 = document.getElementById("level-check").getElementsByTagName("*");
+        c2.map((el,i) => {
+          if(el.tagName=="INPUT" && el.checked){
+            // txt = txt +"<div class=\"list-label\"><strong>"+ c2[i].value+ "</strong>" +"<button id=\""+c2[i].id+"_of_list\"onclick=\"document.getElementById(\'"+c2[i].id+"\').checked = false;showChecked();\">&#x1F7A9;</button></div>";
+            setEnrollString(prevState => ({
+              ...prevState,
+              category: i
+              })
+            );
+          }
+        }) 
+    
+        const c1 = document.getElementById("keyword-check").getElementsByTagName("*");
+        // let txt = "";
+        c1.map((el,i)=>{
+          if(el.tagName=="INPUT" && el.checked){
+            // txt = txt +"<div class=\"list-label\"><strong>"+ c1[i].value+ "</strong>" +"<button id=\""+c1[i].id+"_of_list\"onclick=\"document.getElementById(\'"+c1[i].id+"\').checked = false;showChecked();\">X</button></div>";
+            setEnrollString(prevState => ({
+              ...prevState,
+              sector: i
+              })
+            );
+          }
+        }) 
+    }}
     </div>
-
-
   );
+  
 }
 
 export default App;
