@@ -1,29 +1,87 @@
 import axios from 'axios';
-import * as log_trademark from '../abi/cypressContract.json';
+import * as log_trademark from '../abi/marklogContractAbi.json';
 /**
- * log_trademark.default[0] -> logTrademark
- * log_trademark.default[1] -> mintWithTokenURI
- * log_trademark.default[2] -> safeTransferFrom
- * log_trademark.default[3] -> setTokenUri
- * log_trademark.default[4] -> enrolledTokens
- * log_trademark.default[5] -> logs
- * log_trademark.default[6] -> name
- * log_trademark.default[7] -> ownedTokens
- * log_trademark.default[8] -> symbol
- * log_trademark.default[9] -> timestamps
- * log_trademark.default[10] -> tokenOwner
- * log_trademark.default[11] -> tokenURIs
+ * 
+ * use "find"
+ * let abiFn = log_trademark.default.find( fns => fns.name === "something" );
+ * 
+ * "enrolledTokens"
+ * 
+ * "registerMarkInfo"
+ * "tokenInfoMap"
+ * "setMarkInfo"
+ * "getMarkInfo"
+ * 
+ * "logTrademark"
+ * "getLogTimes"
+ * "getLog"
+ * 
+ * "ownedTokens"
+ * "tokenOwner"
+ * 
+ * "safeTransferFrom" (사용 계획 미정)
+ * 
  */
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_MARKLOG_CYPRESS_CONTRACT_ADDRESS;
-// process.env.REACT_APP_MARKLOG_CONTRACT_ADDRESS
 const A2A_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 const APP_NAME = 'KLAY_MARKET';
 const QR_REQUEST = "https://klipwallet.com/?target=/a2a?request_key=";
 const KLIP_API_REQUEST = "https://a2a-api.klipwallet.com/v2/a2a/result?request_key=";
 
 
+console.log("ABI LIST");
 console.log(log_trademark.default);
+let abiFn = log_trademark.default.find( fns => fns.name === "enrolledTokens" );
+console.log(abiFn);
+
+export const executeContract = (
+  txTo, 
+  functionJSON, 
+  params,
+  setQrvalue,
+  callback) => {
+    axios.post(
+      A2A_API_PREPARE_URL,{ // 지갑 사용해도 되니?
+        bapp: {
+            name: APP_NAME,
+        },
+        type: "execute_contract", // 스마트 컨트랙트 실행할게
+        transaction: {
+            // "from":"",
+            // "to":"smart contract address",
+            "to": txTo,
+            // "value":"0",
+            "abi": functionJSON, // 함수 abi - mint
+            "params": params,
+        }
+      }
+    ).then((response) => {
+        const { request_key } = response.data; // const request_key = response.data.request_key;
+        const _qrcode = `${QR_REQUEST}${request_key}`;
+        setQrvalue(_qrcode);
+
+        let timerId = setInterval( () => {
+            axios.get(`${KLIP_API_REQUEST}${request_key}`)
+            .then((res)=>{
+                if (res.data.result) {
+                    console.log(`[RESULT] ${JSON.stringify(res.data)}`);
+                    callback(res.data.result);
+                    // if (res.data.result.status == "success"){
+                    //     alert('등록 성공!');
+                    //     clearInterval(timerId);
+
+                    // } else if(res.data.result.status == "fail"){
+                    //     alert('이미 등록된 번호 입니다.');
+                    //     clearInterval(timerId);
+                    // }
+                    clearInterval(timerId);
+                }
+            })
+        },1000)
+    })
+  }
+
 
 export const getAddress = (_setQrvalue, callbackfn) => {
     axios.post(
@@ -127,8 +185,8 @@ export const getEnrolledTokens = (_setQrvalue) => {
 
 
 
-export const enrollTrademark = (address, _tokenId, _tokenUri,_setQrvalue) => {
-    if(address == "no address"){
+export const enrollTrademark = (address, _tokenId, _tokenUri, _setQrvalue, callback) => {
+    if(address == "0x0000"){
         alert('클립 지갑 주소를 먼저 인증해주세요.');
     } else {
         console.log(log_trademark.default[1]);
@@ -153,15 +211,16 @@ export const enrollTrademark = (address, _tokenId, _tokenUri,_setQrvalue) => {
             const { request_key } = response.data; // const request_key = response.data.request_key;
             const _qrcode = `${QR_REQUEST}${request_key}`;
             _setQrvalue(_qrcode);
-            window.open(
-                `${QR_REQUEST}${request_key}`,
-                '_blank' // <- This is what makes it open in a new window.
-            );
+            // window.open(
+            //     `${QR_REQUEST}${request_key}`,
+            //     '_blank' // <- This is what makes it open in a new window.
+            // );
             let timerId = setInterval( () => {
                 axios.get(`${KLIP_API_REQUEST}${request_key}`)
                 .then((res)=>{
                     if (res.data.result) {
                         console.log(`[RESULT] ${JSON.stringify(res.data)}`);
+                        callback(res.data.result);
 
                         if (res.data.result.status == "success"){
                             alert('등록 성공!');

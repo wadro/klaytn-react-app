@@ -11,18 +11,8 @@
 # testing
 /coverage
 
-/src/api/UseCaver_old.js
-/src/api/UseKlip_old.js
-# /src/api/UseCaver.js
-/src/App_old.js
-/src/App_old2.js
-/src/App_old.css
-
-# /src/abi/log_trademark_old.json
-/src/abi_copy
 
 /src/constants
-/src/InputTag.js
 
 # production
 /build
@@ -43,6 +33,6 @@ yarn-error.log*
 
 
 # etc
-README-react.md
-README-klaytn.md
-dump-snippets.md
+/old_files
+/src/abi_copy
+/src/api_copy
