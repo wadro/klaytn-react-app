@@ -1,3 +1,7 @@
+# Notice: 
+2022년 1월 부터 개발 재개 예정입니다.
+Development is expected to resume in Jan. 2022.
+
 # klaytn-react-app
 LikeLion(멋쟁이사자처럼) Klaytn NFT 강의 구현
 
