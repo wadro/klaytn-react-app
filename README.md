@@ -2,6 +2,9 @@
 2022년 1월 부터 개발 재개 예정입니다.  
 Development is expected to resume in Jan. 2022.  
 
+Gist:  
+https://gist.github.com/wadro/6fac56024ba4e2ebda34ec354ce0dbf6
+
 # klaytn-react-app
 LikeLion(멋쟁이사자처럼) Klaytn NFT 강의 구현
 
@@ -26,4 +29,3 @@ LikeLion(멋쟁이사자처럼) Klaytn NFT 강의 구현
 
 ## 할일 
 1. 스마트 컨트랙트 수정 => enrolledTokens 목록 조회 (unique ID 할당하기 위함)
-2. 
